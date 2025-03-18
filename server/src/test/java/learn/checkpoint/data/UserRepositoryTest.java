@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) // Use real DB if needed
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Transactional
 class UserRepositoryTest {
     @PersistenceContext
@@ -32,7 +32,7 @@ class UserRepositoryTest {
 
     @Test
     public void testFindAllUsers() {
-        User user = new User (4,"testUser4", "ye@haw.com", "$2y$10$Ww8dXn9Xujg5guCJoTVeS.JuYpj3akufOudfR0XE0U38QU3/tdC3G", "Test4", "User4");
+        User user = new User (4,"testUser4", "$2y$10$Ww8dXn9Xujg5guCJoTVeS.JuYpj3akufOudfR0XE0U38QU3/tdC3G", "mail@email.com", "Test4", "User4");
         userRepository.save(user);
 
         assertThat(userRepository.findAll()).hasSize(4);
@@ -48,8 +48,23 @@ class UserRepositoryTest {
 
     @Test
     void create() {
-        User user = new User (4,"testUser4", "ye@haw.com", "$2y$10$Ww8dXn9Xujg5guCJoTVeS.JuYpj3akufOudfR0XE0U38QU3/tdC3G", "Test4", "User4");
+        User user = new User (4,"testUser4", "$2y$10$Ww8dXn9Xujg5guCJoTVeS.JuYpj3akufOudfR0XE0U38QU3/tdC3G", "hello@gmail.com", "Test4", "User4");
         userRepository.save(user);
         assertThat(userRepository.findAll()).hasSize(4);
     }
+
+    @Test
+    void findByUsername() {
+        User user = userRepository.findByUsername("testUser1");
+        assertNotNull(user);
+        assertEquals("testUser1", user.getUsername());
+    }
+
+    @Test
+    void findByEmail() {
+        User user = userRepository.findByEmail("ye@haw.com");
+        assertNotNull(user);
+        assertEquals("testUser3", user.getUsername());
+}
+
 }

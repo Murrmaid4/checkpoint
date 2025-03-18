@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2cbc9ac3-2101-4f64-a69f-fdca285553f9" name="Changes" comment="" />
+    <list default="true" id="2cbc9ac3-2101-4f64-a69f-fdca285553f9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/learn/checkpoint/data/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/learn/checkpoint/data/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/learn/checkpoint/data/UserRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/test/java/learn/checkpoint/data/UserRepositoryTest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,9 +13,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2uRymSGV3QmzHxcD5Ca69Xk3JkR" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -22,7 +25,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "user-service",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/brandimurray/Desktop/Dev10/checkpoint"
   }
