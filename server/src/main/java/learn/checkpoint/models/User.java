@@ -1,5 +1,6 @@
 package learn.checkpoint.models;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 import java.util.List;
 import java.util.Objects;
@@ -12,19 +13,32 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userId;
 
+    @NotBlank(message = "Username is required")
+    @Size( min = 4, max = 50, message = "Username must be less than 50 characters")
     private String username;
 
     @Column(nullable = false)
+    @Size(min = 8, max = 255, message = "Password must be between 8 and 255 characters")
     private String password; // Store only the **hashed** password!
 
+    @NotBlank(message = "Email is required")
+    @NotNull(message = "Email is required")
+    @Size(max = 105, message = "Email must be less than 105 characters")
+    @Email(message = "Invalid email format")
     private String email;
 
+    @NotBlank(message = "First name is required")
+    @NotNull(message = "First name is required")
+    @Size(max = 105, message = "First name must be less than 105 characters")
     private String first_name;
 
+    @NotBlank(message = "Last name is required")
+    @NotNull(message = "Last name is required")
+    @Size(max = 105, message = "Last name must be less than 105 characters")
     private String last_name;
 
 //    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<UserList> UserLists; // User's custom lists
+//    private List<UserList> userLists; // User's custom lists
 //
 //    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 //    private List<GameLog> gameLogs; // Games the user is currently playing
