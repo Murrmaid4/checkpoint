@@ -1,5 +1,6 @@
 package learn.checkpoint.domain;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -14,6 +15,8 @@ import java.util.Set;
 @Service
 public class UserService {
 
+
+    private final int BCRYPT_COST = 12;
 private final UserRepository userRepository;
 
 
@@ -28,12 +31,16 @@ private final UserRepository userRepository;
             return result;
         }
 
-      User addedUser = userRepository.save(user);
+      ;
 
-        if (addedUser == null) {
+        if (user == null) {
             result.addErrorMessage("User could not be created.", ResultType.INVALID);
         } else {
-            result.setPayload(addedUser);
+            String hashedPassword = BCrypt.withDefaults().hashToString(BCRYPT_COST, user.getPassword().toCharArray());
+
+            user.setPassword(hashedPassword);
+            User createdUser = userRepository.save(user);
+            result.setPayload(createdUser);
         }
         return result;
     }

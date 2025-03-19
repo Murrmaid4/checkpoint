@@ -1,0 +1,45 @@
+# happy path - also signup link
+POST http://localhost:8080/api/user
+Content-Type: application/json
+
+{
+    "username": "test username 10",
+    "password": "password10",
+    "email": "mail@mail.org",
+    "first_name": "first name",
+    "last_name": "last name"
+}
+
+### 
+# login post 
+POST http://localhost:8080/api/user/login
+Content-Type: application/json
+
+{
+    "username": "test username 10",
+    "password": "password10"
+}   
+
+###
+
+# non existant username
+POST http://localhost:8080/api/user/login
+Content-Type: application/json
+
+{
+    "username": "fake username",
+    "password": "password"
+}
+
+###
+
+# incorrect password for existing username
+POST http://localhost:8080/api/user/login
+Content-Type: application/json
+
+{
+    "username": "test username 10",
+    "password": "wrong-password"
+}
+
+###

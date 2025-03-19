@@ -21,6 +21,7 @@ public class User {
     @Size(min = 8, max = 255, message = "Password must be between 8 and 255 characters")
     private String password; // Store only the **hashed** password!
 
+
     @NotBlank(message = "Email is required")
     @NotNull(message = "Email is required")
     @Size(max = 105, message = "Email must be less than 105 characters")
