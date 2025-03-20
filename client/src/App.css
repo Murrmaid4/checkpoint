@@ -1,6 +1,25 @@
 
 @import url("https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800");
 @import "tailwindcss";
+
+
+@font-face {
+  font-family: 'Venite Adoremus'; /* Replace with your font family name */
+  src: url('../src/assets/fonts/VeniteAdoremus-rgRBA.ttf') format('tff'), /* Replace with your font file path */
+       
+  url('../src/assets/fonts/VeniteAdoremusStraight-Yzo6v.ttf') format('tff'); /* Optional: Add other formats */
+  font-weight: normal; /* Or any desired weight */
+  font-style: normal; /* Or any desired style */
+}
+
+@font-face {
+  font-family: 'Venite Adoremus'; /* Replace with your font family name */
+  src: url('../src/assets/fonts/VeniteAdoremus-rgRBA.ttf') format('tff'), /* Replace with your font file path */
+       
+  url('../src/assets/fonts/VeniteAdoremusStraight-Yzo6v.ttf') format('woff'); /* Optional: Add other formats */
+  font-weight: normal; /* Or any desired weight */
+  font-style: normal; /* Or any desired style */
+}
 /* imports */
 
 :root{
@@ -63,7 +82,7 @@
 }
 
 .link{
-  text-decoration: none;
+  text-decoration: none !important;
   color: #f4f4f4;
 }
 /* Landing page css */
@@ -78,7 +97,9 @@
 .semi-bold{
   font-weight: 600;
 }
-
+.gamerFont{
+  font-family: "Venite Adoremus", sans-serif;
+}
 
 .nav-item{
   font-family: "Montserrat", sans-serif;
@@ -87,3 +108,4 @@
 
 }
 /* nav css  */
+

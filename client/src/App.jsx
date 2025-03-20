@@ -5,6 +5,7 @@ import NotFound from "./components/NotFound";
 import Landing from "./components/Landing";
 
 
+
 function App() {
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [hasFinishedCheckingLocalStorage, setHasFinishedCheckingLocalStorage] =
@@ -32,6 +33,7 @@ function App() {
           /> */}
           <Routes>
           <Route path="/" element={<Landing />} />
+          
           <Route path="*" element={<NotFound />}/>
           </Routes>
         
