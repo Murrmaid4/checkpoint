@@ -1,42 +1,111 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+
+@import url("https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800");
+@import "tailwindcss";
+
+
+@font-face {
+  font-family: 'Venite Adoremus'; /* Replace with your font family name */
+  src: url('../src/assets/fonts/VeniteAdoremus-rgRBA.ttf') format('tff'), /* Replace with your font file path */
+       
+  url('../src/assets/fonts/VeniteAdoremusStraight-Yzo6v.ttf') format('tff'); /* Optional: Add other formats */
+  font-weight: normal; /* Or any desired weight */
+  font-style: normal; /* Or any desired style */
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+@font-face {
+  font-family: 'Venite Adoremus'; /* Replace with your font family name */
+  src: url('../src/assets/fonts/VeniteAdoremus-rgRBA.ttf') format('tff'), /* Replace with your font file path */
+       
+  url('../src/assets/fonts/VeniteAdoremusStraight-Yzo6v.ttf') format('woff'); /* Optional: Add other formats */
+  font-weight: normal; /* Or any desired weight */
+  font-style: normal; /* Or any desired style */
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* imports */
+
+:root{
+  --primary: #1a1a1a;
+  --secondary: #F8D621;
+  --tertiary: #A9CEF4;
+  --green: #A2D729;
+  
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* color variables */
+
+
+
+* {
+  box-sizing: border-box;
+
+  /* background-color: var(--primary); */
+ color: #f4f4f4;
+ font-family: "Montserrat", sans-serif;
+ font-weight: 400;
+
+}
+/* styling all */
+
+.red{
+
+  border: 1px solid red;
+}
+/* debugging */
+
+
+.main {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.video-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* background-color: rgba(0, 0, 0, .4); */
+  background-color: black;
+  opacity: .4;
+  z-index: -1;
 }
 
-.card {
-  padding: 2em;
+.link{
+  text-decoration: none !important;
+  color: #f4f4f4;
+}
+/* Landing page css */
+
+.yellow{
+  color: var(--secondary);
 }
 
-.read-the-docs {
-  color: #888;
+.bold{
+  font-weight: 800;
 }
+.semi-bold{
+  font-weight: 600;
+}
+.gamerFont{
+  font-family: "Venite Adoremus", sans-serif;
+}
+
+.nav-item{
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 1.4em;
+
+}
+/* nav css  */
+
