@@ -65,7 +65,7 @@ class GameLogRepositoryTest {
     @Test
     void findByUserId() {
         List<GameLog> actual = gameLogRepository.findByUserId(1);
-
+        assertEquals(3, actual.size());
 
     }
 
@@ -89,6 +89,6 @@ class GameLogRepositoryTest {
     @Test
     void delete() {
         gameLogRepository.deleteById(1);
-        assertEquals(0, gameLogRepository.findAll().size());
+        assertEquals(2, gameLogRepository.findAll().size());
     }
 }

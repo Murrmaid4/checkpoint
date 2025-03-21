@@ -133,6 +133,10 @@ begin
                (1, 2, 'Great game, but a little too hard.', 'Playing', '2021-01-02 12:00:00', '2021-01-02 12:00:00'),
                (1, 3, 'I love the exploration in this game.', 'Playing', '2021-01-03 12:00:00', '2021-01-03 12:00:00');
 
+  insert into reviews (user_id, game_id, rating, review_body, created)
+        values
+        (1, 1, 5.0, 'This game is a classic!', '2021-01-01 12:00:00'),
+        (1, 2, 4.5, 'Great game, but a little too hard.', '2021-01-02 12:00:00');
 
 end//
 delimiter ;

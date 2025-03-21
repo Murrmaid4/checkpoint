@@ -1,9 +1,13 @@
 package learn.checkpoint.models;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "game_log")
 public class GameLog {
@@ -41,54 +45,6 @@ public class GameLog {
         this.user = user;
         this.status = status;
         this.notes = notes;
-        this.log_date = log_date;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Game getGame() {
-        return game;
-    }
-
-    public void setGame(Game game) {
-        this.game = game;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public GameStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(GameStatus status) {
-        this.status = status;
-    }
-
-    public String getNotes() {
-        return notes;
-    }
-
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
-
-    public LocalDateTime getLog_date() {
-        return log_date;
-    }
-
-    public void setLog_date(LocalDateTime log_date) {
         this.log_date = log_date;
     }
 
