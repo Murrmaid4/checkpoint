@@ -16,7 +16,8 @@ import java.util.Objects;
 public class Game {
   @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int gameId;
+    @Column(name = "game_id")
+    private int id;
 
     @NotBlank(message = "Title is required")
     private String title;
@@ -34,9 +35,12 @@ public class Game {
   @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<GameLog> gameLogs = new ArrayList<>();
 
+  @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<Review> reviews; // Reviews posted by user
 
-  public Game(int gameId, String title, String platform, int release_year, String genre, String publisher, String thumbnail) {
-    this.gameId = gameId;
+
+  public Game(int id, String title, String platform, int release_year, String genre, String publisher, String thumbnail) {
+    this.id = id;
     this.title = title;
     this.platform = platform;
     this.release_year = release_year;
@@ -45,8 +49,8 @@ public class Game {
     this.thumbnail = thumbnail;
   }
 
-  public Game(int gameId, String title, String platform, int release_year, String genre, String publisher, String thumbnail, List<GameLog> gameLogs) {
-    this.gameId = gameId;
+  public Game(int id, String title, String platform, int release_year, String genre, String publisher, String thumbnail, List<GameLog> gameLogs) {
+    this.id = id;
     this.title = title;
     this.platform = platform;
     this.release_year = release_year;
@@ -56,19 +60,35 @@ public class Game {
     this.gameLogs = gameLogs;
   }
 
+
+
+  public Game(int id, String title, String platform, int release_year, String genre, String publisher, String thumbnail, List<GameLog> gameLogs, List<Review> reviews) {
+    this.id = id;
+    this.title = title;
+    this.platform = platform;
+    this.release_year = release_year;
+    this.genre = genre;
+    this.publisher = publisher;
+    this.thumbnail = thumbnail;
+    this.gameLogs = gameLogs;
+    this.reviews = reviews;
+  }
+
+
+
   public Game() {
   }
 
-    @Override
+  @Override
   public boolean equals(Object o) {
     if (o == null || getClass() != o.getClass()) return false;
     Game game = (Game) o;
-    return gameId == game.gameId && release_year == game.release_year && Objects.equals(title, game.title) && Objects.equals(platform, game.platform) && Objects.equals(genre, game.genre) && Objects.equals(publisher, game.publisher) && Objects.equals(thumbnail, game.thumbnail) && Objects.equals(gameLogs, game.gameLogs);
+    return id == game.id && release_year == game.release_year && Objects.equals(title, game.title) && Objects.equals(platform, game.platform) && Objects.equals(genre, game.genre) && Objects.equals(publisher, game.publisher) && Objects.equals(thumbnail, game.thumbnail) && Objects.equals(gameLogs, game.gameLogs) && Objects.equals(reviews, game.reviews);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(gameId, title, platform, release_year, genre, publisher, thumbnail, gameLogs);
+    return Objects.hash(id, title, platform, release_year, genre, publisher, thumbnail, gameLogs, reviews);
   }
 }
 

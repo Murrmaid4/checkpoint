@@ -31,16 +31,15 @@ class UserListItemRepositoryTest {
 
     @Autowired
     UserListItemRepository userListItemRepository;
-    User user = new User (1,"testUser1", "$2y$10$Ww8dXn9Xujg5guCJoTVeS.JuYpj3akufOudfR0XE0U38QU3/tdC3G", "email@email.com", "Test", "User");
+
 
     @Autowired
     UserListRepository userListRepository;
 
-    UserList testUserList = new UserList(1, user, "Favorites");
 
     Game addGame = new Game(5,"Stardew Valley", "PC", 2016, "Simulation", "ConcernedApe", "https://upload.wikimedia.org/wikipedia/en/3/34/Stardew_Valley_logo.png");
 
-    UserListItem testUserListItems = new UserListItem(0, testUserList, addGame);
+
 
 @Test
 void shouldAdd() {
@@ -69,7 +68,9 @@ void shouldDelete() {
 }
 
 
-//    need assistance with JPA and testing here - later I'm going to make a route that grabs a list and all the games in said list not sure what method I will need to complete that task
 
+
+
+//
 
 }
