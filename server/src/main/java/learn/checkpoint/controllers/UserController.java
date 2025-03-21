@@ -67,7 +67,7 @@ public class UserController {
     private Map<String, String> createJwtFromUser(User user) {
         String jwt = Jwts.builder()
                 .claim("username", user.getUsername())
-                .claim("userId", user.getUserId())
+                .claim("userId", user.getId())
                 .signWith(secretSigningKey.getKey())
                 .compact();
         Map<String, String> output = new HashMap<>();

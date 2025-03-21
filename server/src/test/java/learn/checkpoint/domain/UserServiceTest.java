@@ -187,11 +187,11 @@ class UserServiceTest {
         @Test
         void happyPath() {
             User user = newUser;
-            when(repository.findById(user.getUserId())).thenReturn(user);
+            when(repository.findById(user.getId())).thenReturn(user);
             Result<User> expected = new Result<>();
             expected.setPayload(user);
 
-            Result<User> actual = service.findById(user.getUserId());
+            Result<User> actual = service.findById(user.getId());
 
             assertEquals(expected, actual);
         }
@@ -199,13 +199,13 @@ class UserServiceTest {
         @Test
         void shouldNotFindMissingUser() {
             User user = newUser;
-            when(repository.findById(user.getUserId())).thenReturn(null);
+            when(repository.findById(user.getId())).thenReturn(null);
             Result<User> expected = new Result<>();
-            expected.addErrorMessage("User not found with id: " + user.getUserId(), ResultType.NOT_FOUND);
+            expected.addErrorMessage("User not found with id: " + user.getId(), ResultType.NOT_FOUND);
 
-            Result<User> actual = service.findById(user.getUserId());
+            Result<User> actual = service.findById(user.getId());
 
-            assertTrue(actual.getErrorMessages().contains("User not found with id: " + user.getUserId()));
+            assertTrue(actual.getErrorMessages().contains("User not found with id: " + user.getId()));
             assertEquals(ResultType.NOT_FOUND, actual.getResultType());
         }
     }
