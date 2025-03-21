@@ -127,6 +127,12 @@ begin
         (1, 2),
         (1, 3);
 
+        insert into game_log (user_id, game_id, notes, status, log_date, updated)
+               values
+               (1, 1, 'This game is a classic!', 'Playing', '2021-01-01 12:00:00', '2021-01-01 12:00:00'),
+               (1, 2, 'Great game, but a little too hard.', 'Playing', '2021-01-02 12:00:00', '2021-01-02 12:00:00'),
+               (1, 3, 'I love the exploration in this game.', 'Playing', '2021-01-03 12:00:00', '2021-01-03 12:00:00');
+
 
 end//
 delimiter ;
