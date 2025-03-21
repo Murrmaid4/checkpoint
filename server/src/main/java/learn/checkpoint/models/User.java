@@ -1,12 +1,16 @@
 package learn.checkpoint.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 
+@Setter
+@Getter
 @Entity
 @Table(name = "user")
 public class User {
@@ -40,9 +44,9 @@ public class User {
     @Size(max = 105, message = "Last name must be less than 105 characters")
     private String last_name;
 
-//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<UserList> userLists; // User's custom lists
-//
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserList> userLists; // User's custom lists
+
      @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<GameLog> gameLogs = new ArrayList<>();
 
@@ -73,61 +77,28 @@ public class User {
         this.gameLogs = gameLogs;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
+    public User(int id, String username, String password, String email, String first_name, List<UserList> userLists, String last_name, List<GameLog> gameLogs) {
         this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getFirst_name() {
-        return first_name;
-    }
-
-    public void setFirst_name(String first_name) {
         this.first_name = first_name;
-    }
-
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public void setLast_name(String last_name) {
+        this.userLists = userLists;
         this.last_name = last_name;
-    }
-
-    public List<GameLog> getGameLogs() {
-        return gameLogs;
-    }
-
-    public void setGameLogs(List<GameLog> gameLogs) {
         this.gameLogs = gameLogs;
     }
+
+    // Helper method to add a UserList
+    public void addUserList(UserList userList) {
+        userLists.add(userList);
+        userList.setUser(this); // Ensure the relationship is properly set
+    }
+    // Helper method to remove a UserList
+    public void removeUserList(UserList userList) {
+        userLists.remove(userList);
+        userList.setUser(null); // Avoid stale references
+    }
+
     // Helper method to add a GameLog
     public void addGameLog(GameLog gameLog) {
         gameLogs.add(gameLog);
@@ -144,12 +115,12 @@ public class User {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(email, user.email) && Objects.equals(first_name, user.first_name) && Objects.equals(last_name, user.last_name) && Objects.equals(gameLogs, user.gameLogs);
+        return id == user.id && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(email, user.email) && Objects.equals(first_name, user.first_name) && Objects.equals(last_name, user.last_name) && Objects.equals(userLists, user.userLists) && Objects.equals(gameLogs, user.gameLogs);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, password, email, first_name, last_name, gameLogs);
+        return Objects.hash(id, username, password, email, first_name, last_name, userLists, gameLogs);
     }
 }
 

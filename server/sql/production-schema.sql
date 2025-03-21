@@ -4,7 +4,7 @@ use checkPoint;
 
 CREATE TABLE IF NOT EXISTS game (
 	game_id int AUTO_INCREMENT NOT NULL UNIQUE,
-	title varchar(255) NOT NULL,
+	`title` varchar(255) NOT NULL,
 	platform varchar(255),
 	release_year int,
 	genre varchar(255),

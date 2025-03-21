@@ -2,11 +2,15 @@ package learn.checkpoint.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "game")
 public class Game {
@@ -55,71 +59,7 @@ public class Game {
   public Game() {
   }
 
-  public int getGameId() {
-    return gameId;
-  }
-
-  public void setGameId(int gameId) {
-    this.gameId = gameId;
-  }
-
-  public String getTitle() {
-    return title;
-  }
-
-  public void setTitle(String title) {
-    this.title = title;
-  }
-
-  public int getRelease_year() {
-    return release_year;
-  }
-
-  public void setRelease_year(int release_year) {
-    this.release_year = release_year;
-  }
-
-  public String getPlatform() {
-    return platform;
-  }
-
-  public void setPlatform(String platform) {
-    this.platform = platform;
-  }
-
-  public String getGenre() {
-    return genre;
-  }
-
-  public void setGenre(String genre) {
-    this.genre = genre;
-  }
-
-  public String getPublisher() {
-    return publisher;
-  }
-
-  public void setPublisher(String publisher) {
-    this.publisher = publisher;
-  }
-
-  public String getThumbnail() {
-    return thumbnail;
-  }
-
-  public void setThumbnail(String thumbnail) {
-    this.thumbnail = thumbnail;
-  }
-
-  public List<GameLog> getGameLogs() {
-    return gameLogs;
-  }
-
-  public void setGameLogs(List<GameLog> gameLogs) {
-    this.gameLogs = gameLogs;
-  }
-
-  @Override
+    @Override
   public boolean equals(Object o) {
     if (o == null || getClass() != o.getClass()) return false;
     Game game = (Game) o;

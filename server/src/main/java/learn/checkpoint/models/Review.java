@@ -1,4 +1,4 @@
 package learn.checkpoint.models;
 
-public class UserListItems {
+public class Review {
 }
