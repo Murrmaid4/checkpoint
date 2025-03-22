@@ -1,6 +1,7 @@
 package learn.checkpoint.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,18 +21,22 @@ public class Review {
     @Column(name = "review_id")
     private int id;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "game_id")
     private Game game;
 
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @Size(min = 1, max = 10)
     @Column(name = "rating", nullable = false)
     private double rating;
 
+    @Size(max = 1000, message = "Review must be less than 1000 characters.")
     @Column(name = "review_body")
     private String review_body;
 
