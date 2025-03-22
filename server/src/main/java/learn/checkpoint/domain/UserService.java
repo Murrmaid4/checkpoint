@@ -27,14 +27,13 @@ private final UserRepository userRepository;
     public Result<User> createUser(User user) {
         Result<User> result = validate(user);
 
-        if (!result.isSuccess()){
-            return result;
+        if (userRepository.findByUsername(user.getUsername()) != null) {
+            result.addErrorMessage("Username is already taken", ResultType.INVALID);
         }
 
-      ;
+        if (!result.isSuccess()) {
 
-        if (user == null) {
-            result.addErrorMessage("User could not be created.", ResultType.INVALID);
+            return result;
         } else {
             String hashedPassword = BCrypt.withDefaults().hashToString(BCRYPT_COST, user.getPassword().toCharArray());
 
@@ -76,6 +75,7 @@ private final UserRepository userRepository;
             result.addErrorMessage("User is required.", ResultType.INVALID);
             return result;
         }
+
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();

@@ -1,5 +1,6 @@
 package learn.checkpoint.models;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,10 +19,14 @@ public class UserList {
     @Column(name = "user_list_id")
     private int id;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @NotNull
+    @NotBlank
+    @Size(max = 50, message = "List name must be less than 50 characters.")
     @Column(name = "list_name", nullable = false)
     private String list_name;
 

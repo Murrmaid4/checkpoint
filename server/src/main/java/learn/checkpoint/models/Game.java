@@ -19,6 +19,7 @@ public class Game {
     @Column(name = "game_id")
     private int id;
 
+    @NotNull
     @NotBlank(message = "Title is required")
     private String title;
 
@@ -30,6 +31,10 @@ public class Game {
 
     private String publisher;
 
+  @Pattern(
+          regexp = "^(https?:\\/\\/.*\\.(?:png|jpg|jpeg|gif|svg|webp))$",
+          message = "Invalid image URL. It must be a valid link ending with png, jpg, jpeg, gif, svg, or webp."
+  )
     private String thumbnail;
 
   @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)

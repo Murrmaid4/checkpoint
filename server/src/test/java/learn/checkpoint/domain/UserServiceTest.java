@@ -21,8 +21,10 @@ class UserServiceTest {
     @Autowired
     UserService service;
 
-    private User testUser;
+
     User newUser = new User (4,"testUser4", "$2y$10$Ww8dXn9Xujg5guCJoTVeS.JuYpj3akufOudfR0XE0U38QU3/tdC3G", "hello@gmail.com", "Test4", "User4");
+    User duplicateUser = new User (0,"testUser4", "$2y$10$Ww8dXn9Xujg5guCJoTVeS.JuYpj3akufOudfR0XE0U38QU3/tdC3G", "email@email.net", "Joe", "Schmoe");
+
 
     @MockBean
     UserRepository repository;
@@ -138,13 +140,13 @@ class UserServiceTest {
         @Test
         void failsWhenUsernameIsAlreadyTaken(){
             User toAdd = newUser;
-            when(repository.findByUsername(toAdd.getUsername())).thenReturn(toAdd);
+            when(repository.findByUsername(toAdd.getUsername())).thenReturn(duplicateUser);
             Result<User> expected = new Result<>();
             expected.addErrorMessage("Username is already taken", ResultType.INVALID);
 
-            Result<User> actual = service.createUser(toAdd);
+            Result<User> actual = service.createUser(duplicateUser);
 
-
+//            assertTrue(actual.getErrorMessages().contains("Username is already taken"));
             assertEquals(ResultType.INVALID, actual.getResultType());
         }
 
