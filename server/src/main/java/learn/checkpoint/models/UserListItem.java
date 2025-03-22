@@ -1,6 +1,7 @@
 package learn.checkpoint.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,10 +18,12 @@ public class UserListItem {
     @Column(name = "user_list_items_id")
     private int id;
 
+    @NotNull
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_list_id", nullable = false)
     private UserList userList; // Many user list items belong to one user list
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "game_id", nullable = false)
     private Game game; // Optionally, link to a 'Game' entity or another entity
