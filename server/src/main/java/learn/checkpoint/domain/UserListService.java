@@ -10,6 +10,7 @@ import learn.checkpoint.models.UserList;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -55,12 +56,18 @@ private final UserListRepository userListRepository;
     public Result<UserList> updateList(UserList userList) {
         Result<UserList> result = validate(userList);
 
-        if (!result.isSuccess()) {
+        if (userList.getId() <= 0) {
+            result.addErrorMessage("List ID is required", ResultType.INVALID);
             return result;
         }
 
-        if (!userListRepository.existsById(userList.getId())) {
+        Optional <UserList> existing = userListRepository.findById(userList.getId());
+        if (existing.isEmpty()) {
             result.addErrorMessage("List ID not found", ResultType.NOT_FOUND);
+            return result;
+        }
+
+        if (!result.isSuccess()) {
             return result;
         }
 
@@ -72,10 +79,13 @@ private final UserListRepository userListRepository;
     public Result<UserList> deleteList(int listId) {
         Result<UserList> result = new Result<>();
 
-        if (!userListRepository.existsById(listId)) {
-            result.addErrorMessage("List ID not found", ResultType.NOT_FOUND);
+
+        Optional<UserList> existingList = userListRepository.findById(listId);
+        if (existingList.isEmpty()) {
+            result.addErrorMessage("UserList not found.", ResultType.NOT_FOUND);
             return result;
         }
+
 
         userListRepository.deleteById(listId);
         return result;

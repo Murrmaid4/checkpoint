@@ -32,7 +32,11 @@ public class Review {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Size(min = 1, max = 10)
+
+    @NotNull
+    @PositiveOrZero
+    @DecimalMin(value = "0.0", message = "Rating must be between 0.0 and 10.0.")
+    @DecimalMax(value = "10.0", message = "Rating must be between 0.0 and 10.0.")
     @Column(name = "rating", nullable = false)
     private double rating;
 

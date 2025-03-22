@@ -5,11 +5,13 @@ import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 import learn.checkpoint.data.GameLogRepository;
+import learn.checkpoint.data.GameRepository;
 import learn.checkpoint.models.GameLog;
 import learn.checkpoint.models.UserList;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -18,21 +20,26 @@ public class GameLogService {
 
     private final GameLogRepository gameLogRepository;
 
-    public GameLogService(GameLogRepository gameLogRepository) {
+    private final GameRepository gameRepository;
+
+    public GameLogService(GameLogRepository gameLogRepository, GameRepository gameRepository) {
         this.gameLogRepository = gameLogRepository;
+        this.gameRepository = gameRepository;
     }
 
     //create
     public Result<GameLog> create(GameLog gameLog) {
         Result<GameLog> result = validate(gameLog);
 
-        if (!result.isSuccess()) {
+
+
+        if(result.isSuccess()){
+            gameLog = gameLogRepository.save(gameLog);
+            result.setPayload(gameLog);
             return result;
         }
 
-        gameLog = gameLogRepository.save(gameLog);
-        result.setPayload(gameLog);
-        return result;
+    return result;
     }
 
 
@@ -61,18 +68,30 @@ public class GameLogService {
     public Result<GameLog> update(GameLog gameLog) {
         Result<GameLog> result = validate(gameLog);
 
-        if (!result.isSuccess()) {
-            return result;
-        }
-
         if (gameLog.getId() <= 0) {
             result.addErrorMessage("GameLog `id` must be set.", ResultType.INVALID);
             return result;
         }
 
-        if (!gameLogRepository.existsById(gameLog.getId())) {
-            String msg = String.format("GameLog ID: %s, not found.", gameLog.getId());
-            result.addErrorMessage(msg, ResultType.NOT_FOUND);
+       // Fetch the existing GameLog by ID
+        Optional<GameLog> existingGameLogOpt = gameLogRepository.findById(gameLog.getId());
+
+        if (existingGameLogOpt.isEmpty()) {
+            result.addErrorMessage("GameLog not found.", ResultType.NOT_FOUND);
+            return result;
+        }
+
+        GameLog existingGameLog = existingGameLogOpt.get();
+        int gameId = existingGameLog.getGame().getId();
+
+        // Ensure the game ID has not changed
+        if ( gameLog.getGame().getId() != gameId) {
+            result.addErrorMessage("Game ID cannot be changed.", ResultType.INVALID);
+            return result;
+        }
+
+        if (!result.isSuccess()) {
+            return result;
         }
 
         gameLog = gameLogRepository.save(gameLog);
@@ -85,8 +104,9 @@ public class GameLogService {
     public Result<GameLog> deleteById(int id) {
         Result<GameLog> result = new Result<>();
 
-        if (!gameLogRepository.existsById(id)) {
-            result.addErrorMessage("GameLog ID not found", ResultType.NOT_FOUND);
+        Optional<GameLog> existingGameLog = gameLogRepository.findById(id);
+        if (existingGameLog.isEmpty()) {
+            result.addErrorMessage("GameLog not found.", ResultType.NOT_FOUND);
             return result;
         }
 

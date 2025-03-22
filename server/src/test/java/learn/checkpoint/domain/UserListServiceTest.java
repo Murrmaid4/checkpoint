@@ -2,6 +2,7 @@ package learn.checkpoint.domain;
 
 import learn.checkpoint.data.UserListRepository;
 import learn.checkpoint.models.Game;
+import learn.checkpoint.models.GameLog;
 import learn.checkpoint.models.User;
 import learn.checkpoint.models.UserList;
 import org.junit.jupiter.api.Test;
@@ -113,15 +114,64 @@ class UserListServiceTest {
         assertEquals(ResultType.NOT_FOUND, actual.getResultType());
     }
 
+//    update
+
+    @Test
+    void updateList() {
+        UserList list = testUserList;
+        when(repository.findById(1)).thenReturn(java.util.Optional.of(list));
+
+        Result<UserList> actual;
+
+        list.setList_name("Updated List");
+
+        actual = service.updateList(list);
+        assertEquals(ResultType.SUCCESS, actual.getResultType());
+
+
+    }
+
+    @Test
+    void unHappyUpdateList() {
+        UserList toAdd = newList;
+        UserList afterAdd = newList;
+        when(repository.save(toAdd)).thenReturn(afterAdd);
+
+        Result<UserList> expected = new Result<>();
+        expected.setPayload(afterAdd);
+
+        toAdd.setList_name(null);
+        Result<UserList> actual = service.updateList(toAdd);
+
+        assertEquals(ResultType.INVALID, actual.getResultType());
+
+    }
+
 
 //happy path delete
     @Test
     void deleteList() {
+        UserList list = new UserList(1, user, "Favorites");
+
+
+        when(repository.findById(1)).thenReturn(java.util.Optional.of(list));
+       doNothing().when(repository).deleteById(1);
+
+        Result<UserList> actual = service.deleteList(1);
+        assertEquals(ResultType.SUCCESS, actual.getResultType());
+
+
     }
 
 //    unhappy path delete
 
     @Test
     void unHappyDeleteList() {
+
+        when(repository.findById(1)).thenReturn(Optional.empty());
+
+        Result<UserList> actual = service.deleteList(1);
+
+        assertEquals(ResultType.NOT_FOUND, actual.getResultType());
     }
 }

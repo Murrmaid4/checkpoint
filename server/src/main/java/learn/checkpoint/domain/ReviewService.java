@@ -10,6 +10,7 @@ import learn.checkpoint.models.Review;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -53,19 +54,33 @@ private final ReviewRepository reviewRepository;
   public Result<Review> update(Review review) {
         Result<Review> result = validate(review);
 
-        if (!result.isSuccess()) {
-            return result;
-        }
-
         if (review.getId() <= 0) {
             result.addErrorMessage("Review ID must be set for update", ResultType.INVALID);
             return result;
         }
 
-        if (!reviewRepository.existsById(review.getId())) {
+       Optional<Review> existing = reviewRepository.findById(review.getId());
+        int userId = existing.get().getUser().getId();
+        int reviewId = existing.get().getId();
+
+        if (existing.isEmpty()) {
             result.addErrorMessage("Review ID not found", ResultType.NOT_FOUND);
             return result;
         }
+
+        if(review.getUser().getId() != userId){
+            result.addErrorMessage("User ID cannot be changed", ResultType.INVALID);
+            return result;
+        }
+
+        if(review.getId() != reviewId){
+            result.addErrorMessage("Review ID cannot be changed", ResultType.INVALID);
+            return result;
+        }
+
+      if (!result.isSuccess()) {
+          return result;
+      }
 
         review = reviewRepository.save(review);
         result.setPayload(review);
@@ -77,7 +92,10 @@ private final ReviewRepository reviewRepository;
     public Result<Review> deleteById(int id) {
         Result<Review> result = new Result<>();
 
-        if (!reviewRepository.existsById(id)) {
+        Optional<Review> existing = reviewRepository.findById(id);
+
+
+        if (existing.isEmpty()) {
             result.addErrorMessage("Review ID not found", ResultType.NOT_FOUND);
             return result;
         }
