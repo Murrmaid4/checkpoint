@@ -1,5 +1,6 @@
 package learn.checkpoint.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
@@ -37,10 +38,13 @@ public class Game {
   )
     private String thumbnail;
 
+
   @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
+  @JsonIgnore
   private List<GameLog> gameLogs = new ArrayList<>();
 
   @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
+  @JsonIgnore
   private List<Review> reviews; // Reviews posted by user
 
 

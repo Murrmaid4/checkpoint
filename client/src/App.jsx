@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import NotFound from "./components/NotFound";
 import Landing from "./components/Landing";
+import AllGames from "./components/AllGames";
 
 
 
@@ -33,7 +34,7 @@ function App() {
           /> */}
           <Routes>
           <Route path="/" element={<Landing />} />
-          
+          <Route path="/games" element={<AllGames />} />
           <Route path="*" element={<NotFound />}/>
           </Routes>
         

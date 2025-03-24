@@ -35,9 +35,10 @@ function Landing() {
         transition={{ delay: 0.5 }}
       >
         <FeatureCard icon={<FaGamepad />} title="Track Your Games" description="Log your gaming progress and keep track of completed games." url="/games" />
-        <FeatureCard icon={<FaStar />} title="Favorite List" description="Save and organize your favorite games." url="/"/>
-        <FeatureCard icon={<FaListUl />} title="Wishlist" description="Keep a list of games you want to play in the future." url="/" />
-        <FeatureCard icon={<FaPlay />} title="Reviews" description="Share your thoughts on the games you've played." url="/"/>
+        <FeatureCard icon={<FaStar />} title="Favorite List" description="Save and organize your favorite games." url="/log"/>
+        <FeatureCard icon={<FaListUl />} title="Wishlist" description="Keep a list of games you want to play in the future." url="/list" />
+        <FeatureCard icon={<FaPlay />} title="Reviews" description="Share your thoughts on the games you've played." url="/games"/>
+        
       </motion.div>
       
       <motion.div 
@@ -46,7 +47,9 @@ function Landing() {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.7 }}
       >
-        <Link className="bg-green-600 hover:bg-green-700 text-white  py-2 px-4 rounded " to="/signup">Get Started</Link>
+        <div className='spacer-32'></div>
+        <Link className="yellow-bg  text-black semi-bold py-3 px-4 rounded text-sm" to="/signup">Get Started</Link>
+        {/* this will go to sign up page */}
       </motion.div>
     </div>
   );

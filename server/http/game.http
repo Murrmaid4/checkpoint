@@ -1,0 +1,23 @@
+@url = http://localhost:8080/api/game
+
+
+### GET all games
+GET {{url}}
+
+### GET game by id
+GET {{url}}/1
+
+###
+POST {{url}}
+Content-Type: application/json
+
+{
+
+    "title": "Kingdom Hearts",
+    "platform": "PS2",
+   "release_year":2002,
+    "genre": "Fantasy",
+    "publisher": "Square Enix",
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/en/9/9b/Kingdom_Hearts_III_box_art.jpg"
+}
+

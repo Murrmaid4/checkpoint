@@ -1,0 +1,35 @@
+@url = http://localhost:8080/api/log
+
+
+### GET all logs by user
+GET {{url}}/userLog/3
+
+### get log by id
+GET {{url}}/1
+
+### create a log
+POST {{url}}
+Content-Type: application/json
+
+{
+    "user_id": 3,
+    "game_id": 11,
+    "notes": "this is a log for a game",
+    "status": "On_Hold"
+    
+}
+
+### update a log (by the log id) <-will have option to edit log inside full log view page >
+
+PUT {{url}}/13
+Content-Type: application/json
+
+{
+  
+    "notes": "does this update",
+    "status": "Playing"
+    
+}
+
+### delete a log (by the log id)
+DELETE {{url}}/13

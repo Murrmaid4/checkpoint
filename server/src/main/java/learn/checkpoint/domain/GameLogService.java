@@ -10,6 +10,7 @@ import learn.checkpoint.models.GameLog;
 import learn.checkpoint.models.UserList;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -29,11 +30,15 @@ public class GameLogService {
 
     //create
     public Result<GameLog> create(GameLog gameLog) {
+
+
+
         Result<GameLog> result = validate(gameLog);
 
 
 
         if(result.isSuccess()){
+            gameLog.setLog_date(LocalDateTime.now());
             gameLog = gameLogRepository.save(gameLog);
             result.setPayload(gameLog);
             return result;
@@ -44,12 +49,18 @@ public class GameLogService {
 
 
 
+
 //find by user id
     public List<GameLog> findByUserId(int userId) {
         return gameLogRepository.findByUserId(userId);
     }
 
 //find by id
+//    public GameLog findById(int id) {
+//        return gameLogRepository.findById(id);
+//    }
+
+
     public Result<GameLog> findById(int id) {
         Result<GameLog> result = new Result<>();
 
@@ -101,8 +112,8 @@ public class GameLogService {
 
 
 //    delete
-    public Result<GameLog> deleteById(int id) {
-        Result<GameLog> result = new Result<>();
+    public Result<Void> deleteById(int id) {
+        Result<Void> result = new Result<>();
 
         Optional<GameLog> existingGameLog = gameLogRepository.findById(id);
         if (existingGameLog.isEmpty()) {
