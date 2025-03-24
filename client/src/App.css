@@ -43,7 +43,35 @@
  font-weight: 400;
 
 }
-/* styling all */
+/* styling all  */
+
+.spacer-64{
+
+  height: 64px;
+}
+
+.spacer-32{
+
+  height: 32px;
+}
+
+.bold{
+  font-weight: 800;
+}
+.semi-bold{
+  font-weight: 600;
+}
+
+.responsive{
+  max-width: 100%;
+  height: auto;
+}
+
+.gradient{
+  background: rgb(33,37,41);
+  background: linear-gradient(180deg, rgba(33,37,41,1) 0%, rgba(11,11,11,1) 100%);
+}
+/* helper css classes  */
 
 .red{
 
@@ -84,10 +112,16 @@
 .link{
   text-decoration: none !important;
   color: #f4f4f4;
+  cursor: pointer !important;
 }
 a{
   text-decoration: none !important;
+  cursor: pointer !important;
   /* color: #f4f4f4; */
+}
+
+.yellow-bg{
+  background-color: var(--secondary);
 }
 /* Landing page css */
 
@@ -95,12 +129,7 @@ a{
   color: var(--secondary);
 }
 
-.bold{
-  font-weight: 800;
-}
-.semi-bold{
-  font-weight: 600;
-}
+
 .gamerFont{
   font-family: "Venite Adoremus", sans-serif;
 }
@@ -112,4 +141,3 @@ a{
 
 }
 /* nav css  */
-

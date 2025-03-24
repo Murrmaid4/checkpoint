@@ -10,6 +10,7 @@ import learn.checkpoint.models.User;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -41,6 +42,20 @@ public class GameService {
         game = repository.save(game);
         result.setPayload(game);
         return result;
+    }
+
+    public List<Game> findAll() {
+        List<Game> games = repository.findAll();
+        System.out.println("Games Retrieved: " + games);
+        return games;
+    }
+
+    public Game findById(int gameId) {
+        return repository.findById(gameId);
+    }
+
+    public Game findByTitle(String title) {
+        return repository.findByTitle(title);
     }
 
     private Result<Game> validate(Object object) {

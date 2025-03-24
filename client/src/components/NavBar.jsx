@@ -4,7 +4,7 @@ import logo from '../assets/logo-full-white.png';
 
 const NavBar = ({ loggedInUser, setLoggedInUser }) => {
     return (
-        <header >
+        <header className='bg-dark'>
 				<nav className='navbar navbar-dark navbar-expand'>
 					<div className=' d-flex justify-content-between container'>
                     <div className='d-flex align-items-center'>

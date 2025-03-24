@@ -4,12 +4,17 @@ import NavBar from './NavBar'
 
 function NotFound() {
   return (
-    <div  className="d-flex justify-content-center align-items-center flex-column bg-dark vh-full">
-      <NavBar />
+    <div>
+    <NavBar />
+    <main className='main gradient'>
+    <div  className="d-flex justify-content-center align-items-center flex-column  vh-full">
+      <div className='spacer-64'></div>
       <h1>
         404 - Not Found
       </h1>
-      <img src={Image} alt="Not Found" />
+      <div className='spacer-32'></div>
+      <img src={Image} alt="Not Found" className='responsive' />
+      <div className='spacer-64'></div>
       <h2>
 
         But you found something even better... 
@@ -17,6 +22,8 @@ function NotFound() {
 
       
 
+    </div>
+    </main>
     </div>
   )
 }

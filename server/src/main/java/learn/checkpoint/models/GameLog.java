@@ -18,13 +18,11 @@ public class GameLog {
     @Column(name = "game_log_id")
     private int id;
 
-    @NotNull
+
     @ManyToOne
     @JoinColumn(name = "game_id")
     private Game game;
 
-
-    @NotNull
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
@@ -39,6 +37,9 @@ public class GameLog {
     @Column(name = "log_date", nullable = false)
     private LocalDateTime log_date;
 
+    @Column( name = "updated")
+    private LocalDateTime updated;
+
     public GameLog() {
     }
 
@@ -51,15 +52,25 @@ public class GameLog {
         this.log_date = log_date;
     }
 
+    public GameLog(int id, Game game, User user, String notes, GameStatus status, LocalDateTime log_date, LocalDateTime updated) {
+        this.id = id;
+        this.game = game;
+        this.user = user;
+        this.notes = notes;
+        this.status = status;
+        this.log_date = log_date;
+        this.updated = updated;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         GameLog gameLog = (GameLog) o;
-        return id == gameLog.id && Objects.equals(game, gameLog.game) && Objects.equals(user, gameLog.user) && status == gameLog.status && Objects.equals(notes, gameLog.notes) && Objects.equals(log_date, gameLog.log_date);
+        return id == gameLog.id && Objects.equals(game, gameLog.game) && Objects.equals(user, gameLog.user) && status == gameLog.status && Objects.equals(notes, gameLog.notes) && Objects.equals(log_date, gameLog.log_date) && Objects.equals(updated, gameLog.updated);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, game, user, status, notes, log_date);
+        return Objects.hash(id, game, user, status, notes, log_date, updated);
     }
 }
