@@ -4,9 +4,12 @@ import { FaGamepad, FaStar, FaListUl, FaPlay } from "react-icons/fa";
 import videoBg from "../assets/bg-video.mp4";
 import logo from "../assets/logo.png";
 import { Link } from 'react-router';
+import Footer from './Footer';
 
 function Landing() {
   return (
+    <>
+
     <div className="container-fluid text-white min-vh-100 d-flex flex-column align-items-center py-5 main">
         <div className='overlay'></div>
       <video src={videoBg} autoPlay loop muted className="video-bg" />
@@ -34,9 +37,9 @@ function Landing() {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5 }}
       >
-        <FeatureCard icon={<FaGamepad />} title="Track Your Games" description="Log your gaming progress and keep track of completed games." url="/games" />
-        <FeatureCard icon={<FaStar />} title="Favorite List" description="Save and organize your favorite games." url="/log"/>
-        <FeatureCard icon={<FaListUl />} title="Wishlist" description="Keep a list of games you want to play in the future." url="/list" />
+        <FeatureCard icon={<FaGamepad />} title="Track Your Games" description="Log your gaming progress and keep track of completed games." url="/log" />
+        <FeatureCard icon={<FaStar />} title="Favorite List" description="Save and organize your favorite games." url="/lists"/>
+        <FeatureCard icon={<FaListUl />} title="Wishlist" description="Keep a list of games you want to play in the future." url="/lists" />
         <FeatureCard icon={<FaPlay />} title="Reviews" description="Share your thoughts on the games you've played." url="/games"/>
         
       </motion.div>
@@ -48,10 +51,13 @@ function Landing() {
         transition={{ delay: 0.7 }}
       >
         <div className='spacer-32'></div>
-        <Link className="yellow-bg  text-black semi-bold py-3 px-4 rounded text-sm" to="/signup">Get Started</Link>
+        <Link className="yellow-bg text-black semi-bold py-3 px-4 rounded text-sm" to="/signup">Get Started</Link>
         {/* this will go to sign up page */}
       </motion.div>
+    
     </div>
+    
+    </>
   );
 }
 
@@ -70,6 +76,7 @@ function FeatureCard({ icon, title, description, url }) {
       </div>
     </div>
     </Link>
+   
   );
 }
 
