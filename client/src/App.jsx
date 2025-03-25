@@ -3,7 +3,10 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import NotFound from "./components/NotFound";
 import Landing from "./components/Landing";
-import AllGames from "./components/AllGames";
+import AllGames from "./components/GamePages/AllGames";
+import Footer from "./components/Footer";
+import SignUpComponent from "./components/Signup/SignUpComponent";
+import UserLogs from "./components/LogsPages/UserLogs";
 
 
 
@@ -24,7 +27,7 @@ function App() {
   }
 
   return (
-    <main >
+    <main className="main">
       
       <Router>
      
@@ -34,11 +37,17 @@ function App() {
           /> */}
           <Routes>
           <Route path="/" element={<Landing />} />
+          <Route path="/log" element={<UserLogs />} />
           <Route path="/games" element={<AllGames />} />
-          <Route path="*" element={<NotFound />}/>
+          <Route path="/lists" element={<AllGames />} />
+          <Route path="/signup" element={<SignUpComponent   loggedInUser={loggedInUser}
+            setLoggedInUser={setLoggedInUser}/>} />
+          <Route path="*" element={<NotFound  />}/>
           </Routes>
-        
+          <Footer />
       </Router>
+    
+
     </main>
   );
 }

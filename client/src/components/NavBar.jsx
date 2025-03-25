@@ -4,9 +4,9 @@ import logo from '../assets/logo-full-white.png';
 
 const NavBar = ({ loggedInUser, setLoggedInUser }) => {
     return (
-        <header className='bg-dark'>
-				<nav className='navbar navbar-dark navbar-expand'>
-					<div className=' d-flex justify-content-between container'>
+        <header>
+				<nav className='bg-transparent fixed top-0 w-full z-50 p-4'>
+					<div className=' d-flex justify-content-center'>
                     <div className='d-flex align-items-center'>
                     
                         <NavLink className='navbar-brand' to='/'>

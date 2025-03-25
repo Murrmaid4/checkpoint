@@ -4,12 +4,15 @@ import NavBar from './NavBar'
 
 function NotFound() {
   return (
+    <>
+    <NavBar/>
     <div>
-    <NavBar />
+    
     <main className='main gradient'>
+    <div className='spacer-64'></div>
     <div  className="d-flex justify-content-center align-items-center flex-column  vh-full">
       <div className='spacer-64'></div>
-      <h1>
+      <h1 className='yellow semi-bold'>
         404 - Not Found
       </h1>
       <div className='spacer-32'></div>
@@ -25,6 +28,7 @@ function NotFound() {
     </div>
     </main>
     </div>
+    </>
   )
 }
 

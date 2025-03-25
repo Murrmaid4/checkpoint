@@ -15,7 +15,7 @@ use checkPoint;
 
         insert into user (username, email, password, first_name, last_name)
         values
-        ('testUser1', 'email@email.com', '$2y$10$Ww8dXn9Xujg5guCJoTVeS.JuYpj3akufOudfR0XE0U38QU3/tdC3G', 'Test', 'User'),
+        ('test', 'email@email.com', 'password', 'Test', 'User'),
         ('testUser2', 'mail@cox.net', '$2y$10$Ww8dXn9Xujg5guCJoTVeS.JuYpj3akufOudfR0XE0U38QU3/tdC3G', 'Test2', 'User2'),
         ('testUser3', 'ye@haw.com', '$2y$10$Ww8dXn9Xujg5guCJoTVeS.JuYpj3akufOudfR0XE0U38QU3/tdC3G', 'Test3', 'User3');
 
