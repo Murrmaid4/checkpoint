@@ -19,11 +19,16 @@ const SignUpComponent=({loggedInUser,setLoggedInUser})=>{
   return (
     <div className="gradient main">
       <div className="spacer-64"></div>
+      
       <div className="spacer-64"></div>
-      <div className="spacer-64"></div>
+      <div className="spacer-64">
+    
+      </div>
       <div className={containerClass} id="container">
-        <SignUpForm />
-        <SignInForm />
+        <SignUpForm  loggedInUser={loggedInUser}
+            setLoggedInUser={setLoggedInUser}/>
+        <SignInForm loggedInUser={loggedInUser}
+            setLoggedInUser={setLoggedInUser} />
         <div className="overlay-container">
           <div className="overlay-signup">
             <div className="overlay-panel overlay-left">

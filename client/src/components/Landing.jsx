@@ -4,9 +4,9 @@ import { FaGamepad, FaStar, FaListUl, FaPlay } from "react-icons/fa";
 import videoBg from "../assets/bg-video.mp4";
 import logo from "../assets/logo.png";
 import { Link } from 'react-router';
-import Footer from './Footer';
 
-function Landing() {
+
+function Landing({loggedInUser,setLoggedInUser}) {
   return (
     <>
 
@@ -51,7 +51,7 @@ function Landing() {
         transition={{ delay: 0.7 }}
       >
         <div className='spacer-32'></div>
-        <Link className="yellow-bg text-black semi-bold py-3 px-4 rounded text-sm" to="/signup">Get Started</Link>
+        <Link className="yellow-bg text-black semi-bold py-3 px-4 rounded text-sm " to="/signup">Get Started</Link>
         {/* this will go to sign up page */}
       </motion.div>
     
@@ -65,11 +65,11 @@ function FeatureCard({ icon, title, description, url }) {
   return (
     <Link className="link" to={url}>
     <div className="col  ">
-      <div className="card bg-dark  h-100">
-        <div className="card-body d-flex align-items-center">
+      <div className="card bg-dark  h-100 ">
+        <div className="card-body d-flex align-items-center ">
           <div className="fs-2 text-primary me-3">{icon}</div>
           <div>
-            <h5 className="yellow ">{title}</h5>
+            <h5 className="yellow">{title}</h5>
             <p className="card-text">{description}</p>
           </div>
         </div>

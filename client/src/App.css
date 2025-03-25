@@ -94,11 +94,14 @@
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  
  
 }
 
-.mgt-60{
-  margin-top: 60px;
+
+.section-sm{
+
+max-width: 1300px;
 }
 
 .video-bg {
@@ -188,8 +191,8 @@ a{
   background: rgb(33, 37, 41);
   background: linear-gradient(
     180deg,
-    rgba(33, 37, 41, 1) 0%,
-    rgba(11, 11, 11, 1) 100%
+    rgb(47, 47, 48) 0%,
+    rgb(28, 27, 27) 100%
   );
   color: #f8d621;
   display: flex;
@@ -355,6 +358,8 @@ margin-bottom: 8px;
   width: 40px;
 } */
 
+
+
 /* signup css  */
 
 
@@ -377,4 +382,6 @@ margin-bottom: 8px;
   flex-wrap: wrap-reverse;
 
 }
+
+
 /* Footer css */
