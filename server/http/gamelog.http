@@ -33,3 +33,7 @@ Content-Type: application/json
 
 ### delete a log (by the log id)
 DELETE {{url}}/13
+
+### get log by jwt 
+
+GET {{url}}/myLogs

@@ -22,7 +22,7 @@ const SignUpComponent=({loggedInUser,setLoggedInUser})=>{
       
       <div className="spacer-64"></div>
       <div className="spacer-64">
-    
+      {/* <Link>Back</Link> */}
       </div>
       <div className={containerClass} id="container">
         <SignUpForm  loggedInUser={loggedInUser}

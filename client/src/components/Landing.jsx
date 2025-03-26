@@ -37,7 +37,7 @@ function Landing({loggedInUser,setLoggedInUser}) {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5 }}
       >
-        <FeatureCard icon={<FaGamepad />} title="Track Your Games" description="Log your gaming progress and keep track of completed games." url="/log" />
+        <FeatureCard icon={<FaGamepad />} title="Track Your Games" description="Log your gaming progress and keep track of completed games." url="/myLogs" />
         <FeatureCard icon={<FaStar />} title="Favorite List" description="Save and organize your favorite games." url="/lists"/>
         <FeatureCard icon={<FaListUl />} title="Wishlist" description="Keep a list of games you want to play in the future." url="/lists" />
         <FeatureCard icon={<FaPlay />} title="Reviews" description="Share your thoughts on the games you've played." url="/games"/>
@@ -51,7 +51,7 @@ function Landing({loggedInUser,setLoggedInUser}) {
         transition={{ delay: 0.7 }}
       >
         <div className='spacer-32'></div>
-        <Link className="yellow-bg text-black semi-bold py-3 px-4 rounded text-sm " to="/signup">Get Started</Link>
+        {!loggedInUser && (<Link className="yellow-bg text-black semi-bold py-3 px-4 rounded text-sm " to="/signup">Get Started</Link>)}
         {/* this will go to sign up page */}
       </motion.div>
     

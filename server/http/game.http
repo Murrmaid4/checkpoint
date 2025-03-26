@@ -1,4 +1,4 @@
-@url = http://localhost:8080/api/game
+@url = http://localhost:8080/api/games
 
 
 ### GET all games

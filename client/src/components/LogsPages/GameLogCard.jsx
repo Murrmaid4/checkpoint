@@ -8,7 +8,7 @@ const GameLogCard = ({ gameName, status, notes, logDate }) => {
     <>
       {/* Game Log Card */}
       <div
-        className="bg-gray-900 text-white p-4 rounded-2xl shadow-lg w-full max-w-md mx-auto transition-transform hover:scale-105 cursor-pointer"
+        className=" text-white p-4 rounded-2xl shadow-lg w-full max-w-md mx-auto transition-transform hover:scale-105 cursor-pointer"
         onClick={() => setIsOpen(true)}
       >
         <h2 className="text-xl font-bold">{gameName}</h2>

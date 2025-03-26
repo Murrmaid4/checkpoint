@@ -9,6 +9,9 @@ import learn.checkpoint.models.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.Jwts;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -26,12 +29,13 @@ public class GameLogController {
 
     private final UserService userService;
 
+    private final SecretSigningKey secretSigningKey;
 
-
-    public GameLogController(GameLogService service , GameService gameService, UserService userService) {
+    public GameLogController(GameLogService service , GameService gameService, UserService userService, SecretSigningKey secretSigningKey) {
         this.service = service;
         this.gameService = gameService;
         this.userService = userService;
+        this.secretSigningKey = secretSigningKey;
     }
 
 
@@ -47,18 +51,18 @@ public class GameLogController {
         }
     }
 
-//    find by userID
+//    find by users ID
 
-    @GetMapping("/userLog/{userId}")
-    public ResponseEntity<Object> findByUserId(@PathVariable int userId) {
-        List<GameLog> gameLog = service.findByUserId(userId);
-        if (gameLog == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
-            return ResponseEntity.ok(gameLog);
+    @GetMapping("/myLogs")
+    public Object findUserLogs(@RequestHeader Map<String, String> headers) {
+        Integer userId = getUserIdFromHeaders(headers);
+        if (userId == null) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
-
+        return service.findByUserId(userId);
     }
+
+
 
     //add
     @PostMapping
@@ -68,7 +72,7 @@ public class GameLogController {
 
         Game game = gameService.findById(gameId);
         Result<User> user = userService.findById(userId);
-
+//do i need to get id from headers here???
 
         if (game == null) {
             return new ResponseEntity<>(List.of("Game ID not found"), HttpStatus.NOT_FOUND);
@@ -152,5 +156,18 @@ public class GameLogController {
         return ErrorResponse.build(result);
     }
 
+private Integer getUserIdFromHeaders(Map<String, String> headers) {
+    if (headers.get("authorization") == null) {
+        return null;
+    }
 
+    try {
+        Jws<Claims> claims = Jwts.parserBuilder()
+                .setSigningKey(secretSigningKey.getKey())
+                .build().parseClaimsJws(headers.get("authorization"));
+        return (Integer) claims.getBody().get("userId");
+    } catch (Exception e) {
+        return null;
+    }
+}
 }

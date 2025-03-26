@@ -3,10 +3,10 @@ use checkPoint;
  insert into game (title, platform, release_year, genre, publisher, thumbnail)
         values
         ('Super Mario Bros.', 'NES', 1985, 'Platformer', 'Nintendo', 'https://upload.wikimedia.org/wikipedia/en/0/03/Super_Mario_Bros._box.png'),
-        ('The Legend of Zelda', 'NES', 1986, 'Action-Adventure', 'Nintendo', 'https://upload.wikimedia.org/wikipedia/en/4/41/The_Legend_of_Zelda_NES.png'),
-        ('Metroid', 'NES', 1986, 'Action-Adventure', 'Nintendo', 'https://upload.wikimedia.org/wikipedia/en/3/39/Metroid_box_art.jpg'),
+        ('The Legend of Zelda', 'NES', 1986, 'Action-Adventure', 'Nintendo', 'https://upload.wikimedia.org/wikipedia/en/4/41/Legend_of_zelda_cover_%28with_cartridge%29_gold.png'),
+        ('Metroid', 'NES', 1986, 'Action-Adventure', 'Nintendo', 'https://i.ebayimg.com/images/g/UUEAAOSw1Xlkjmjc/s-l1200.jpg'),
         ('Final Fantasy', 'NES', 1987, 'Role-Playing', 'Square', 'https://upload.wikimedia.org/wikipedia/en/3/3e/Final_Fantasy_NES_box_art.jpg'),
-        ('Stardew Valley', 'PC', 2016, 'Simulation', 'ConcernedApe', 'https://upload.wikimedia.org/wikipedia/en/3/34/Stardew_Valley_logo.png'),
+        ('Stardew Valley', 'PC', 2016, 'Simulation', 'ConcernedApe', 'https://i.redd.it/2ppo5tnap89a1.jpg'),
         ('The Witcher 3: Wild Hunt', 'PC', 2015, 'Action-Adventure', 'CD Projekt', 'https://upload.wikimedia.org/wikipedia/en/0/0c/Witcher_3_cover_art.jpg'),
         ('The Elder Scrolls V: Skyrim', 'PC', 2011, 'Action-Adventure', 'Bethesda', 'https://upload.wikimedia.org/wikipedia/en/1/15/The_Elder_Scrolls_V_Skyrim_cover.png'),
         ('Halo: Combat Evolved', 'Xbox', 2001, 'First-Person Shooter', 'Bungie', 'https://upload.wikimedia.org/wikipedia/en/b/b9/Halo_-_Combat_Evolved_%28XBox_version_-_box_art%29.jpg'),
