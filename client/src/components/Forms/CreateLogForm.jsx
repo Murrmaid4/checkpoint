@@ -1,63 +1,64 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-// TODO: Modify this component to support update/edit.
-// An update URL should have an agent id.
-// Use that id to fetch a single agent and populate it in the form.
+
 
 const initialData = {
     game_Id: "",
-    middleName: "",
-    lastName: "",
-    dob: "",
-    heightInInches: "",
+    user_Id: "",
+    status: "",
+    notes: "",
   }
 
-function AgentForm( ) {
-  const [agent, setAgent] = useState(initialData);
+function gameLogForm( {loggedInUser} ) {
+  const [log, setLog] = useState(initialData);
   const [errors, setErrors] = useState([]);
-  const { id } = useParams(); // Get agent ID from URL
+  const { gameId, logId } = useParams(); // Get game ID from URL
   const navigate = useNavigate(); // For redirecting
 
   function handleChange(evt) {
-    setAgent((previous) => {
+    setLog((previous) => {
       const next = { ...previous };
       next[evt.target.name] = evt.target.value;
       return next;
     });
   }
-  // Fetch agent data when editing
+  // Fetch log data when editing
   useEffect(() => {
-    console.log("ID:", id);
-    if (id) {
-      fetch(`http://localhost:8080/api/agent/${id}`)
+    console.log("ID:", logId);
+    if (logId) {
+      fetch(`http://localhost:8080/api/log/${logId}`)
         .then((res) => res.json())
-        .then((data) => setAgent(data))
-        .catch((err) => console.error("Error fetching agent:", err));
+        .then((data) => setLog(data))
+        .catch((err) => console.error("Error fetching log:", err));
     } else {
-      setAgent(initialData);
+      setLog(initialData);
+      
     }
-  }, [id]);
+  }, [logId]);
+
   // TODO: Modify this function to support update as well as add/create.
   function handleSubmit(evt) {
     evt.preventDefault();
 
+    log.game_Id = gameId;
     const config = {
-      method: id ? "PUT" : "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(agent),
+      method: logId ? "PUT" : "POST",
+      headers: { "Content-Type": "application/json", Authorization: loggedInUser.jwt },
+      body: JSON.stringify(log),
     };
 
     fetch(
-      id
-        ? `http://localhost:8080/api/agent/${id}`
-        : "http://localhost:8080/api/agent",
+      logId
+        ? `http://localhost:8080/api/log/${logId}`
+        : "http://localhost:8080/api/log",
       config
+      
     )
       .then((res) => {
         if (res.ok) {
           console.log(res);
-          navigate("/agents"); // Redirect to agent list after saving
+          navigate("/myLogs"); // Redirect to agent list after saving
         } else {
           return res.json();
         }
@@ -79,93 +80,50 @@ function AgentForm( ) {
   }
 
   function handleCancel() {
-    navigate("/agents");
+    navigate("/games");
   }
 
   return (
     <>
-      <h1 className="display-6">
-        {id ? `Edit Agent - ${agent.firstName}` : "Add an Agent"}
+    <div className="main-container">
+        <div className="flex justify-center items-center min-vh-100  flex-column">
+      <h1 className="yellow bold ">
+        {logId ? `Edit Log - ${logId}` : "Add to Log"}
       </h1>
+
       {errors && errors.length > 0 && <div className="alert alert-danger">
                 <ul className="mb-0">
                     {errors.map(err => <li key={err}>{err}</li>)}
                 </ul>
             </div>}
-      <form onSubmit={handleSubmit}>
-        <div className="row mb-3">
-          <div className="col">
-            <label className="form-label" htmlFor="firstName">
-              First Name
+      <div className="w-full max-w-xl">
+      <form onSubmit={handleSubmit} className="form2 ">
+        <div className="text-left">
+          <div className="mb-3">
+            <label className="form-label mb-4" htmlFor="notes">
+             Add your Game notes!
             </label>
-            <input
-              id="firstName"
-              name="firstName"
+            <textarea
+              id="notes"
+              name="notes"
+              placeholder="Enter your notes here..."
               type="text"
               className="form-control"
               required
               onChange={handleChange}
-              value={agent.firstName}
+              value={log.notes}
             />
           </div>
-          <div className="col">
-            <label className="form-label" htmlFor="middleName">
-              Middle Name
-            </label>
-            <input
-              id="middleName"
-              name="middleName"
-              type="text"
-              className="form-control"
-              onChange={handleChange}
-              value={agent.middleName}
-            />
-          </div>
-        </div>
-        <div className="mb-3">
-          <label className="form-label" htmlFor="lastName">
-            Last Name
-          </label>
-          <input
-            id="lastName"
-            name="lastName"
-            type="text"
-            className="form-control"
-            required
-            onChange={handleChange}
-            value={agent.lastName}
-          />
-        </div>
-        <div className="row mb-3">
-          <div className="col">
-            <label className="form-label" htmlFor="dob">
-              DOB
-            </label>
-            <input
-              id="dob"
-              name="dob"
-              type="date"
-              className="form-control"
-              required
-              onChange={handleChange}
-              value={agent.dob}
-            />
-          </div>
-          <div className="col">
-            <label className="form-label" htmlFor="heightInInches">
-              Height (inches)
-            </label>
-            <input
-              id="heightInInches"
-              name="heightInInches"
-              type="number"
-              className="form-control"
-              required
-              min="36"
-              max="96"
-              onChange={handleChange}
-              value={agent.heightInInches}
-            />
+          <div className="mb-5">
+          <label className="mb-2" htmlFor="status">Game Status: </label>
+                    <select name="status" className="form-control " id="status" value={log.status} onChange={handleChange}>
+                        <option value="">Pick a Status...</option>
+                        <option value="PLAYING">Playing Currently</option>
+                        <option value="ON_HOLD">On Hold</option>
+                        <option value="COMPLETED">Completed</option>
+                        <option value="DROPPED">Dropped</option>
+                        <option value="WANT_TO_PLAY">Want to Play</option>
+                    </select>
           </div>
         </div>
         <div className="mb-3">
@@ -182,8 +140,11 @@ function AgentForm( ) {
           </button>
         </div>
       </form>
+      </div>
+      </div>
+      </div>
     </>
   );
 }
 
-export default AgentForm;
+export default gameLogForm;

@@ -21,7 +21,7 @@ Content-Type: application/json
 
 ### update a log (by the log id) <-will have option to edit log inside full log view page >
 
-PUT {{url}}/13
+PUT {{url}}/10
 Content-Type: application/json
 
 {
@@ -37,3 +37,4 @@ DELETE {{url}}/13
 ### get log by jwt 
 
 GET {{url}}/myLogs
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Imhvd2R5cGFydG5lciIsInVzZXJJZCI6NX0.lc2q0r6daxsT8XtnPlHpJkmiANyoZKE3Mi5MLv31hVM

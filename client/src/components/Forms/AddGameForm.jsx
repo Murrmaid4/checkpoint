@@ -1,34 +1,71 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 function AddGameForm() {
-  const [formData, setFormData] = useState({
+  
+//  year select input functionality to mess with later vvv 
+
+    // const currentYear = new Date().getFullYear();
+    // const years = Array.from({ length: 101 }, (_, i) => currentYear - i); // Generates years from current year to 100 years ago
+    // const [selectedYear, setSelectedYear] = useState('');
+  
+    // const handleYearChange = (event) => {
+    //   setSelectedYear(event.target.value);
+    // };
+    const navigate = useNavigate()
+
+    const [errors, setErrors] = useState([])
+  const [newGame, setNewGame] = useState({
     title: "",
     platform: "",
-    releaseYear: "",
+    release_year: "",
     genre: "",
     publisher: "",
     thumbnail: "",
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+  const handleChange = (event) => {
+    setNewGame({ ...newGame, [event.target.name]: event.target.value })
+}
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form Submitted: ", formData);
-    // You can handle form submission here
-  };
+const handleCancel = () => {
+  navigate("/games")
+}
+
+const handleSubmit = (event) => {
+  event.preventDefault()
+
+  fetch("http://localhost:8080/api/games", {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newGame)
+  })
+  .then(response => {
+      if (response.status >= 200 && response.status < 300) {
+          navigate("/games")
+      } else {
+          response.json().then(fetchedErrors => setErrors(fetchedErrors))
+      }
+  })
+
+}
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-2xl font-semibold text-center mb-6">Add New Game</h2>
-        <form onSubmit={handleSubmit}>
+    <>
+   
+    <div className=" gradient">
+    <div className="flex justify-center items-center min-h-screen ">
+    <div className="row">
+            {errors.length > 0 && <ul id="errors">
+                {errors.map(error => <li key={error}>{error}</li>)}
+            </ul>} </div>
+      <div className=" w-full max-w-xl">
+        <h2 className="text-lg bold text-center yellow">Add New Game</h2>
+        <div className="spacer-24"></div>
+        <form onSubmit={handleSubmit} >
           <div className="mb-4">
             <label htmlFor="title" className="block text-sm font-medium text-gray-700">
               Game Title
@@ -37,7 +74,7 @@ function AddGameForm() {
               type="text"
               id="title"
               name="title"
-              value={formData.title}
+              value={newGame.title}
               onChange={handleChange}
               className="w-full p-2 mt-1 border border-gray-300 rounded-md"
               placeholder="Enter game title"
@@ -53,7 +90,7 @@ function AddGameForm() {
               type="text"
               id="platform"
               name="platform"
-              value={formData.platform}
+              value={newGame.platform}
               onChange={handleChange}
               className="w-full p-2 mt-1 border border-gray-300 rounded-md"
               placeholder="Enter platform"
@@ -62,14 +99,14 @@ function AddGameForm() {
           </div>
 
           <div className="mb-4">
-            <label htmlFor="releaseYear" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="release_year" className="block text-sm font-medium text-gray-700">
               Release Year
             </label>
             <input
               type="number"
-              id="releaseYear"
-              name="releaseYear"
-              value={formData.releaseYear}
+              id="release_year"
+              name="release_year"
+              value={newGame.release_year}
               onChange={handleChange}
               className="w-full p-2 mt-1 border border-gray-300 rounded-md"
               placeholder="Enter release year"
@@ -85,7 +122,7 @@ function AddGameForm() {
               type="text"
               id="genre"
               name="genre"
-              value={formData.genre}
+              value={newGame.genre}
               onChange={handleChange}
               className="w-full p-2 mt-1 border border-gray-300 rounded-md"
               placeholder="Enter genre"
@@ -101,7 +138,7 @@ function AddGameForm() {
               type="text"
               id="publisher"
               name="publisher"
-              value={formData.publisher}
+              value={newGame.publisher}
               onChange={handleChange}
               className="w-full p-2 mt-1 border border-gray-300 rounded-md"
               placeholder="Enter publisher"
@@ -110,14 +147,14 @@ function AddGameForm() {
           </div>
 
           <div className="mb-4">
-            <label htmlFor="thumbnailUrl" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="thumbnail" className="block text-sm font-medium text-gray-700">
               Thumbnail URL
             </label>
             <input
               type="url"
-              id="thumbnailUrl"
-              name="thumbnailUrl"
-              value={formData.thumbnailUrl}
+              id="thumbnail"
+              name="thumbnail"
+              value={newGame.thumbnail}
               onChange={handleChange}
               className="w-full p-2 mt-1 border border-gray-300 rounded-md"
               placeholder="Enter thumbnail URL"
@@ -127,14 +164,23 @@ function AddGameForm() {
           <div className="flex justify-center">
             <button
               type="submit"
-              className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition duration-300"
+              className="yellow-bg text-black semi-bold py-2 px-4 rounded text-sm"
             >
-              Add Game
+              Submit
+            </button>
+            <button
+              onClick={handleCancel}
+              type="button"
+              className="transparent yellow semi-bold py-2 px-4 rounded text-sm mx-3 "
+            >
+             Cancel
             </button>
           </div>
         </form>
       </div>
     </div>
+    </div>
+    </>
   );
 }
 

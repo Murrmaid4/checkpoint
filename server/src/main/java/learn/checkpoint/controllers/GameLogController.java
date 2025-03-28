@@ -66,9 +66,12 @@ public class GameLogController {
 
     //add
     @PostMapping
-    public ResponseEntity<Object> create(@RequestBody Map<String, Object> requestBody) {
-       int gameId = (int) requestBody.get("game_id");
-        int userId = (int) requestBody.get("user_id");
+    public ResponseEntity<Object> create(@RequestBody Map<String, Object> requestBody, @RequestHeader Map<String, String> headers) {
+       int gameId = Integer.parseInt((String) requestBody.get("game_Id"));
+        Integer userId = getUserIdFromHeaders(headers);
+        if (userId == null) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
 
         Game game = gameService.findById(gameId);
         Result<User> user = userService.findById(userId);

@@ -41,6 +41,7 @@ public class GlobalErrResponse {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleException(Exception ex) {
+        ex.printStackTrace();
         return new ResponseEntity<String>("Something went wrong on our end :(", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

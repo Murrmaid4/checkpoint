@@ -4,11 +4,10 @@ import NavBar from "./components/NavBar";
 import NotFound from "./components/NotFound";
 import Landing from "./components/Landing";
 import AllGames from "./components/GamePages/AllGames";
-import Footer from "./components/Footer";
 import SignUpComponent from "./components/Signup/SignUpComponent";
 import UserLogs from "./components/LogsPages/UserLogs";
 import AddGameForm from "./components/Forms/AddGameForm";
-
+import CreateLogForm from "./components/Forms/CreateLogForm";
 
 
 function App() {
@@ -28,7 +27,7 @@ function App() {
   }
 
   return (
-    <main className="main">
+    <main >
       
       <Router>
      
@@ -50,9 +49,12 @@ function App() {
           <Route path="/signup" element={<SignUpComponent   loggedInUser={loggedInUser}
             setLoggedInUser={setLoggedInUser}/>} />
 
+         
+         <Route path="/addLog/:gameId" element={<CreateLogForm loggedInUser={loggedInUser}
+            setLoggedInUser={setLoggedInUser}/>} />
           <Route path="*" element={<NotFound  />}/>
           </Routes>
-          <Footer />
+     
       </Router>
     
 

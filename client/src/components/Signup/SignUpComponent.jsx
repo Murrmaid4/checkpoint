@@ -2,6 +2,8 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import SignInForm from "./SignIn.jsx"
 import SignUpForm from "./SignUp.jsx"
+import Footer from "../Footer.jsx"
+import FooterTransparent from "../Footer-transparent.jsx"
 
 
 const SignUpComponent=({loggedInUser,setLoggedInUser})=>{
@@ -17,7 +19,8 @@ const SignUpComponent=({loggedInUser,setLoggedInUser})=>{
     "container " + (type === "signUp" ? "right-panel-active" : ""); 
 
   return (
-    <div className="gradient main">
+    <>
+    <div className="main-container">
       <div className="spacer-64"></div>
       
       <div className="spacer-64"></div>
@@ -59,7 +62,8 @@ const SignUpComponent=({loggedInUser,setLoggedInUser})=>{
         </div>
       </div>
     </div>
-
+<FooterTransparent/>
+    </>
   )
 }
 
