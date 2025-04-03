@@ -33,7 +33,7 @@ const SignUpForm = ({ setLoggedInUser }) => {
                     user.jwt = fetchedUser.jwt
                     setLoggedInUser(user)
                     localStorage.setItem("loggedInUser", JSON.stringify(user))
-                    navigate("/games")
+                    navigate("/myLogs")
                 })
             } else {
                 response.json().then(fetchedErrors => setErrors(fetchedErrors))
