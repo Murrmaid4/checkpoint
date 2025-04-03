@@ -35,7 +35,7 @@ function Games({ loggedInUser, setLoggedInUser }) {
         <div className="spacer-64"></div>
         <div className="spacer-64"></div>
         <div className="d-flex justify-content-center ">
-          <div className=" text-white ">
+          <div className=" text-white max-w-7xl ">
             <GameGrid games={games} />
           </div>
         </div>

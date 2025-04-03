@@ -177,6 +177,17 @@ a{
 
 }
 
+.nav-link {
+    color: #ffffff !important;
+    font-weight: 600;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .nav-link:hover {
+    color: #f8d621 !important;
+    cursor: pointer !important; /* Matches hover:text-yellow-500 */
+}
+
 /* nav css  */
 /* signup css */
 

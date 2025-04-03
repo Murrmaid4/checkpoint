@@ -52,6 +52,8 @@ function App() {
          
          <Route path="/addLog/:gameId" element={<CreateLogForm loggedInUser={loggedInUser}
             setLoggedInUser={setLoggedInUser}/>} />
+            <Route path="/edit/:logId" element={<CreateLogForm loggedInUser={loggedInUser}
+            setLoggedInUser={setLoggedInUser}/>} />
           <Route path="*" element={<NotFound  />}/>
           </Routes>
      

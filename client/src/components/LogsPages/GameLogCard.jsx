@@ -28,7 +28,7 @@ const GameLogCard = ({ game, status, notes, log_date, id, onDelete }) => {
     <div className="mb-4 relative p-4 bg-gray-800 text-white rounded-lg shadow-md transition-transform hover:scale-105 cursor-pointer">
       {/* Edit & Delete Icons */}
       <div className="absolute top-2 right-2 flex space-x-2">
-        <button className="p-1 text-blue-400 hover:text-blue-500">
+        <button className="p-1 text-blue-400 hover:text-blue-500" onClick={() => navigate(`/edit/${id}`)}>
           <PencilIcon className="w-5 h-5" />
         </button>
         <Dialog open={isDeleteOpen} onOpenChange={setIsDeleteOpen}>
@@ -68,7 +68,7 @@ const GameLogCard = ({ game, status, notes, log_date, id, onDelete }) => {
       {/* Status Badge */}
       <span
         className={`inline-block px-3 py-1 mt-2 text-sm font-medium rounded-full ${
-          status === "Completed"
+          status === "COMPLETED"
             ? "bg-green-600"
             : status === "PLAYING"
             ? "bg-blue-600"
